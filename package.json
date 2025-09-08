@@ -1,0 +1,13 @@
+{
+  "name": "alttextbot",
+  "version": "0.1.0",
+  "description": "CLI/library that generates alt text for images using a vision API",
+  "main": "dist/index.js",
+  "bin": {
+    "alttextbot": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "license": "MIT"
+}

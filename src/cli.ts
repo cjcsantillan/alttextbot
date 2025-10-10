@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { VERSION } from './index';
 
-function parseArgs(argv: string[]) {
+export function parseArgs(argv: string[]) {
   const [, , ...rest] = argv;
   return { input: rest[0], flags: rest.slice(1) };
 }
@@ -15,4 +15,6 @@ function main() {
   console.log(`alttextbot v${VERSION} processing: ${input}`);
 }
 
-main();
+if (require.main === module) {
+  main();
+}

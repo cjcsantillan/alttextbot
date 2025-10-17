@@ -28,13 +28,26 @@ export function truncateAltText(altText: string, maxLength?: number): string {
   return `${altText.slice(0, maxLength - 1).trimEnd()}…`;
 }
 
-function main() {
+export const EXIT_CODE = {
+  SUCCESS: 0,
+  RUNTIME_ERROR: 1,
+  USAGE_ERROR: 2,
+} as const;
+
+async function main() {
   const { input } = parseArgs(process.argv);
   if (!input) {
     console.error('Usage: alttextbot <image-path-or-url> [--max-length <n>]');
-    process.exit(1);
+    process.exit(EXIT_CODE.USAGE_ERROR);
   }
-  console.log(`alttextbot v${VERSION} processing: ${input}`);
+
+  try {
+    console.log(`alttextbot v${VERSION} processing: ${input}`);
+    process.exit(EXIT_CODE.SUCCESS);
+  } catch (err) {
+    console.error((err as Error).message);
+    process.exit(EXIT_CODE.RUNTIME_ERROR);
+  }
 }
 
 if (require.main === module) {
